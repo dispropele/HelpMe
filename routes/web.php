@@ -7,6 +7,10 @@ Route::get('/', function () {
     return view('app');
 })->name('home');
 
+Route::get('/403', function () {
+    return view('errors.403');
+});
+
 Route::prefix('auth')->name('auth.')->group(function () {
     // Отображение views
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -17,4 +21,10 @@ Route::prefix('auth')->name('auth.')->group(function () {
 
     // Выход пользователя
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
 });
