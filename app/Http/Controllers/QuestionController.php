@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -17,8 +18,14 @@ class QuestionController extends Controller
         return view('question.create');
     }
 
-    public function showForm()
+    public function showForm(Question $question)
     {
-        return view('question.show');
+        return view('question.show', $question);
     }
+
+    public function create(Request $request)
+    {
+
+    }
+
 }

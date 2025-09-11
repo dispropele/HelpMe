@@ -82,8 +82,9 @@
                         focus:ring-red-500 cursor-pointer">
                     Зарегистрироваться
                 </button>
-                <a class="text-gray-300 text-lg cursor-pointer hover:text-gray-400 transition-colors">
-                    Забыли пароль?
+                <a href="{{route('auth.login')}}"
+                   class="text-gray-300 text-lg cursor-pointer hover:text-gray-400 transition-colors">
+                    Уже есть аккаунт?
                 </a>
             </div>
         </form>

@@ -27,11 +27,12 @@
 
         @auth
             <div class="flex items-center space-x-4">
-                <button class="bg-white border hover:bg-red-500 hover:text-white
-                            cursor-pointer text-black text-xl font-bold
-                            w-12 h-9 transition-colors">
+                <a href="{{route('question.create')}}"
+                   class="bg-white border hover:bg-red-500 hover:text-white
+                          cursor-pointer text-black text-xl font-bold
+                          w-12 h-9 transition-colors flex items-center justify-center">
                     +
-                </button>
+                </a>
                 <a>
                     Профиль
                 </a>
