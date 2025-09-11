@@ -96,7 +96,8 @@
 
                 reader.readAsDataURL(file)
             } else {
-                imagePreview.src = null
+                imageUploadInput.value = '';
+                imagePreview.src = '';
 
                 imagePreview.classList.add('hidden')
                 placeholder.classList.remove('hidden')
