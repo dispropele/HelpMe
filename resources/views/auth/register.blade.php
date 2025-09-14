@@ -1,4 +1,7 @@
 @extends('app')
+
+@section('title', 'Создание аккаунта')
+
 @section('content')
 
     <div class="max-w-4xl mx-auto">

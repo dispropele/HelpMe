@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function(){
         Route::get('/create', [QuestionController::class, 'createForm'])->name('create');
         Route::post('/create', [QuestionController::class, 'create']);
 
-        Route::get('/', [QuestionController::class, 'indexForm'])->name('index');
+        Route::get('/', [QuestionController::class, 'index'])->name('index');
         Route::get('/{question}', [QuestionController::class, 'showForm'])->name('show');
     });
 });

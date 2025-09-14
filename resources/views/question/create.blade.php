@@ -1,4 +1,7 @@
 @extends('app')
+
+@section('title', 'Создание вопроса')
+
 @section('content')
 
     <div class="max-w-4xl mx-auto">
@@ -6,11 +9,13 @@
             Создание вопроса
         </h1>
 
-        <form method="POST" class="bg-zinc-800/50 border-2 border-white p-8 space-y-8"
+        <form method="POST"
+              enctype="multipart/form-data"
+              class="bg-zinc-800/50 border-2 border-white p-8 space-y-8"
               action="{{route('question.create')}}">
             @csrf
             <div>
-                <label for="title" class="block mb-2 text-xl font-semibold text-gray-200">
+                <label for="title" class="block mb-2 font-semibold text-gray-200">
                     Название*
                 </label>
                 <input type="text"
@@ -22,7 +27,8 @@
                        p-3 text-gray-300
                        @error('title') border-red-400 @enderror"
                        maxlength="50"
-                       id="title" value="{{old('title')}}" name="title" required>
+                       id="title" value="{{old('title')}}"
+                       name="title" required>
 
                 @error('title')
                 <p class="text-red-500 text-lg mt-2">
@@ -39,8 +45,17 @@
                           placeholder="Подробнее опишите свой вопрос"
                           class="w-full bg-zinc-800 border-2 p-3 text-gray-300
                           placeholder-gray-500 focus:outline-none focus:ring-2
-                          focus:ring-red-400 focus:border-transparent transition-colors">
+                          focus:ring-red-400 focus:border-transparent
+                          @error('body') border-red-400 @enderror
+                          transition-colors">
+                    {{old('body')}}
                 </textarea>
+
+                @error('body')
+                <p class="text-red-500 text-lg mt-2">
+                    {{ $message }}
+                </p>
+                @enderror
             </div>
 
             <div>
@@ -51,7 +66,9 @@
                 <label for="image-upload"
                        class="mt-4 flex flex-col justify-center
                        items-center border-2 border-dashed
-                       h-48 cursor-pointer hover:border-gray-500 hover:bg-zinc-800 transition-colors">
+                       h-48 cursor-pointer hover:border-gray-500
+                       hover:bg-zinc-800 transition-colors
+                       @error('image') border-red-400 @enderror">
                     <div id="placeholder" class="text-center">
                         <svg class="mx-auto h-12 w-12"
                              viewBox="0 0 24 24"
@@ -71,6 +88,13 @@
                 <input type="file" name="image"
                        accept="image/png, image/jpeg, image/gif"
                        id="image-upload" class="hidden">
+
+                @error('image')
+                <p class="text-red-500 text-lg mt-2">
+                    {{ $message }}
+                </p>
+                @enderror
+
             </div>
 
             <div>
@@ -78,7 +102,7 @@
                     Теги (макс. 5)
                 </label>
                 {{--                Пойдет в контроллер--}}
-                <input type="hidden" name="tags" id="tags-input-hidden">
+                <input type="hidden" name="tags" value="{{old('tags')}}" id="tags-input-hidden">
 
                 {{--                Контейнер для тегов--}}
                 <div id="tags-container" class="mt-2 flex items-center flex-wrap gap-2 p-2 border-2">
@@ -90,14 +114,20 @@
                 <p id="tag-error" class="text-brutal-red text-sm mt-1 hidden"></p>
             </div>
 
-            <div class="flex items-center justify-center">
+            <div class="flex items-center justify-center gap-5">
                 <button type="submit"
-                        class="bg-red-600 text-white font-semibold text-xl
+                        class="bg-red-600 font-semibold text-xl
                         py-2 px-8 border-2 hover:bg-red-700 transition-colors
                         focus:outline-none focus:ring-2 focus:ring-offset-zinc-800
                         focus:ring-red-500 cursor-pointer">
                     Создать
                 </button>
+
+                <a href="{{route('question.index')}}"
+                   class="font-semibold text-xl hover:text-gray-400 transition-colors">
+                    Отмена
+                </a>
+
             </div>
 
         </form>

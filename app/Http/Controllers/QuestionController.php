@@ -11,9 +11,34 @@ use Illuminate\Http\Request;
 class QuestionController extends Controller
 {
     //Методы для отображения страниц
-    public function indexForm()
+    public function index(Request $request)
     {
-        return view('question.index');
+        // Получаем все популярные теги для фильтра
+        $tags = Tag::withCount('questions')
+                ->orderBy('question_count', 'desc')
+                ->take(6)->get();
+
+        $query = Question::query()
+                 ->with('tags') //Подгружаем теги вопроса
+                 ->withCount('answers') //Подгружаем кол-во ответов в answers_count
+                 ->latest(); // Сортируем под дате, сначала новые
+
+        //Проверяем фильтр на тег
+        if($request->has('tag')){
+            //Получаем переданный тег
+            $tagName = $request->tag;
+            //Отбираем вопросы по тегу
+            $query->whereHas('tags', function($q) use ($tagName){
+                $q->where('name', $tagName);
+            });
+        }
+
+        $questions = $query->paginate(10);
+
+        return view('question.index', [
+            'questions' => $questions,
+            'tags' => $tags,
+        ]);
     }
 
     public function createForm()
@@ -36,7 +61,7 @@ class QuestionController extends Controller
             $extension = $file->getClientOriginalExtension();
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
 
-            $path = $file->storeAs("public/questions", $fileNameToStore);
+            $path = $file->storeAs("questions", $fileNameToStore, 'public');
         }
 
         // Создаем вопрос

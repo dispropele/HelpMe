@@ -28,8 +28,8 @@
         @auth
             <div class="flex items-center space-x-4">
                 <a href="{{route('question.create')}}"
-                   class="bg-white border hover:bg-red-500 hover:text-white
-                          cursor-pointer text-black text-xl font-bold
+                   class="bg-red-500 border text-white hover:bg-white hover:text-black
+                          cursor-pointer text-xl font-bold
                           w-12 h-9 transition-colors flex items-center justify-center">
                     +
                 </a>
