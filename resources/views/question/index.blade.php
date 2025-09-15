@@ -14,14 +14,14 @@
             <p class="mb-4 font-semibold text-zinc-500">Фильтр по тегам:</p>
             <div class="flex flex-wrap gap-2 mb-5">
                 @foreach($tags as $tag)
-                    <a href="{{ route('question.index', ['tag' => $tag->name]) }}"
+                    <a href="{{ route('home', ['tag' => $tag->name]) }}"
                        class="bg-zinc-700 px-4 py-1 hover:bg-zinc-600 transition">
                         #{{ $tag->name }}
                     </a>
                 @endforeach
             </div>
 
-            <a href="{{ route('question.index')}}"
+            <a href="{{ route('home')}}"
                class="inline-flex items-center gap-2
                px-4 py-2 border-2 border-white/20
                text-sm font-semibold hover:bg-white/5

@@ -46,9 +46,14 @@ class QuestionController extends Controller
         return view('question.create');
     }
 
-    public function showForm(Question $question)
+    public function show(Question $question)
     {
-        return view('question.show', $question);
+        // Подгружаем автора вопроса и ответы с их авторами
+        $question->load(['author', 'answers.author']);
+
+        return view('question.show', [
+            'question' => $question,
+        ]);
     }
 
     public function create(CreateQuestionRequest $request)

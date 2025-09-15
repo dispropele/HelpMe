@@ -19,9 +19,9 @@ class Answer extends Model
         return $this->belongsTo(Question::class);
     }
 
-    // Возвращаем пользователя ответа
-    public function user()
+    // Возвращаем автора ответа
+    public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

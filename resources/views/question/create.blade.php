@@ -123,7 +123,7 @@
                     Создать
                 </button>
 
-                <a href="{{route('question.index')}}"
+                <a href="{{route('home')}}"
                    class="font-semibold text-xl hover:text-gray-400 transition-colors">
                     Отмена
                 </a>
