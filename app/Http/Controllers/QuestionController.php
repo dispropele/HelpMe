@@ -56,7 +56,7 @@ class QuestionController extends Controller
         ]);
     }
 
-    public function create(CreateQuestionRequest $request)
+    public function store(CreateQuestionRequest $request)
     {
         $validated = $request->validated();
 

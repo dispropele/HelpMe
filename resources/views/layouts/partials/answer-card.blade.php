@@ -1,6 +1,8 @@
 @props(['isProfile' => false])
 
-<div class="border-2 border-zinc-500 bg-zinc-800 p-6">
+<div class="border-2 border-zinc-500
+          shadow-[3px_3px_0px_rgba(255,255,255,0.5)]
+        bg-zinc-800 p-6">
     <div class="flex items-center space-x-4">
         <div class="text-zinc-300 flex flex-col gap-1">
             <div>

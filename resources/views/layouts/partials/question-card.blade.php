@@ -1,4 +1,5 @@
-<div class="border-2 border-zinc-700 p-6">
+<div class="border-2 border-zinc-700 p-6
+shadow-[4px_4px_0px_rgba(255,255,255,0.3)]">
     <div class="flex justify-between items-start">
 {{--        Левая основная часть--}}
         <div>

@@ -20,16 +20,37 @@
                 </div>
             @endguest
 
-            @auth
-{{--                Добавить ссылки для авторизованного пользователя--}}
-            @endauth
         </div>
 
         @auth
             <div class="flex items-center space-x-4">
+
+                <div x-data="{open: false}">
+                    <button @click="open = !open"
+                            class="flex items-center text-sm font-semibold
+                        text-gray-300 hover:text-white focus:outline-none transition">
+                        <span>Меню</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div x-show="open" @click.away="open = false"
+                         x-transition
+                         class="absolute right-0 mt-2 w-48
+                     bg-zinc-800 border border-brutal-border shadow-lg z-20"
+                         style="display: none">
+                        <a class="block px-4 py-2 text-sm text-gray-300 hover:bg-zinc-700 hover:text-white">
+                            Пользователи
+                        </a>
+                    </div>
+                </div>
+
                 <a href="{{route('question.create')}}"
                    class="bg-red-500 border text-white hover:bg-white hover:text-black
                           cursor-pointer text-xl font-bold
+                          shadow-[2px_2px_0px_rgba(255,255,255,0.8)]
+                          hover:shadow-[3px_3px_0px_rgba(255,255,255,0.2)]
                           w-12 h-9 transition-colors flex items-center justify-center">
                     +
                 </a>

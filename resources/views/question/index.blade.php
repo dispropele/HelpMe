@@ -25,6 +25,7 @@
                class="inline-flex items-center gap-2
                px-4 py-2 border-2 border-white/20
                text-sm font-semibold hover:bg-white/5
+               shadow-[3px_3px_0px_rgba(255,255,255,0.1)]
                hover:border-white/30 transition-colors">
                 Сбросить фильтры
             </a>

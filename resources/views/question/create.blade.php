@@ -11,7 +11,9 @@
 
         <form method="POST"
               enctype="multipart/form-data"
-              class="bg-zinc-800/50 border-2 border-white p-8 space-y-8"
+              class="bg-zinc-800/50 border-2
+              shadow-[5px_5px_0px_rgba(255,255,255,0.7)]
+              border-zinc-500 p-8 space-y-8"
               action="{{route('question.create')}}">
             @csrf
             <div>
@@ -41,8 +43,7 @@
                 <label for="body" class="block mb-2 font-semibold text-gray-200">
                     Тело вопроса
                 </label>
-                <textarea id="body" name="body" rows="6"
-                          placeholder="Подробнее опишите свой вопрос"
+                <textarea id="editor" name="body" rows="6"
                           class="w-full bg-zinc-800 border-2 p-3 text-gray-300
                           placeholder-gray-500 focus:outline-none focus:ring-2
                           focus:ring-red-400 focus:border-transparent
@@ -117,7 +118,9 @@
             <div class="flex items-center justify-center gap-5">
                 <button type="submit"
                         class="bg-red-600 font-semibold text-xl
-                        py-2 px-8 border-2 hover:bg-red-700 transition-colors
+                        py-2 px-8 border-2 hover:bg-white hover:text-black transition-colors
+                        shadow-[2px_2px_0px_rgba(255,255,255,0.8)]
+                        hover:shadow-[3px_3px_0px_rgba(255,255,255,0.3)]
                         focus:outline-none focus:ring-2 focus:ring-offset-zinc-800
                         focus:ring-red-500 cursor-pointer">
                     Создать
@@ -237,6 +240,19 @@
                 placeholder.classList.remove('hidden')
             }
         })
+
+        //Создание easyMDE
+        document.addEventListener('DOMContentLoaded', ()=>{
+            if(document.getElementById('editor')){
+                const easyMDE = new EasyMDE({
+                    element: document.getElementById('editor'),
+                    spellcheck: false,
+                    placeholder: "Введите текст вашего вопроса.",
+                    minHeight: "250px",
+                })
+            }
+        });
+
     </script>
 
 @endsection

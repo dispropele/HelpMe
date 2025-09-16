@@ -23,20 +23,18 @@ Route::prefix('auth')->name('auth.')->group(function () {
 
 Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile');
 
-Route::prefix('question')->name('question.')->group(function () {
-    Route::get('/{question}', [QuestionController::class, 'show'])->name('show');
-});
-
-Route::middleware('auth')->group(function(){
-
-    // Маршруты с вопросами
-    Route::prefix('question')->name('question.')->group(function(){
-        Route::get('/create', [QuestionController::class, 'createForm'])->name('create');
-        Route::post('/create', [QuestionController::class, 'create']);
+Route::prefix('question')->name('question.')->group(function(){
+    //Требующие авторизации
+    Route::middleware('auth')->group(function(){
+        Route::get('/create', [QuestionController::class, 'createForm'])
+            ->name('create');
+        Route::post('/create', [QuestionController::class, 'store']);
 
         //Ответы
-        Route::post('/{question}/answer/create', [AnswerController::class, 'store'])->name('answer.store');
-
+        Route::post('/{question}/answer/create', [AnswerController::class, 'store'])
+            ->name('answer.store');
     });
 
+    //Публичные пути
+    Route::get('/{question}', [QuestionController::class, 'show'])->name('show');
 });

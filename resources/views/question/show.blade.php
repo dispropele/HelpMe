@@ -7,7 +7,9 @@
     <div class="max-w-4xl mx-auto">
 
 {{--        Секция вопроса--}}
-        <div class="border-2 border-zinc-500 p-8 bg-zinc-800">
+        <div class="border-2 border-zinc-500 p-8
+            shadow-[5px_5px_0px_rgba(255,255,255,0.6)]
+            bg-zinc-800">
 {{--            Заголовок вопроса --}}
             <h1 class="text-4xl font-semibold">
                 {{ $question->title }}
@@ -23,8 +25,8 @@
             </div>
 
 {{--            Содержимое вопроса--}}
-            <div class="mt-4 text-lg text-zinc-300 leading-relaxed space-y-4">
-                {{ $question->body }}
+            <div class="prose prose-invert mt-4 text-lg text-zinc-300 leading-relaxed space-y-4">
+                {!! markdownToHtml($question->body) !!}
             </div>
 
             @if($question->image_path)
@@ -82,6 +84,8 @@
                     <div class="text-right mt-4">
                         <button type="submit"
                                 class="bg-red-500 font-semibold py-3 px-10 border-2
+                                shadow-[2px_2px_0px_rgba(255,255,255,0.8)]
+                                hover:shadow-[3px_3px_0px_rgba(255,255,255,0.3)]
                                 hover:bg-white hover:text-black transition-colors cursor-pointer">
                             Ответить
                         </button>
