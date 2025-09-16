@@ -17,10 +17,10 @@ class Question extends Model
         'status',
     ];
 
-    // Возвращаем пользователя задавшего вопрос
-    public function user(): BelongsTo
+    // Возвращаем автора вопроса
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     // Возвращаем ответы на вопрос

@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\Users\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('app');
-})->name('home');
+Route::get('/', [QuestionController::class, 'index'])->name('home');
 
 Route::prefix('auth')->name('auth.')->group(function () {
     // Отображение
@@ -20,6 +21,12 @@ Route::prefix('auth')->name('auth.')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
+Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile');
+
+Route::prefix('question')->name('question.')->group(function () {
+    Route::get('/{question}', [QuestionController::class, 'show'])->name('show');
+});
+
 Route::middleware('auth')->group(function(){
 
     // Маршруты с вопросами
@@ -27,13 +34,9 @@ Route::middleware('auth')->group(function(){
         Route::get('/create', [QuestionController::class, 'createForm'])->name('create');
         Route::post('/create', [QuestionController::class, 'create']);
 
-        Route::get('/', [QuestionController::class, 'indexForm'])->name('index');
-        Route::get('/{question}', [QuestionController::class, 'showForm'])->name('show');
-    });
-});
+        //Ответы
+        Route::post('/{question}/answer/create', [AnswerController::class, 'store'])->name('answer.store');
 
-//Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-//    Route::get('/dashboard', function () {
-//        return view('admin.dashboard');
-//    })->name('dashboard');
-//});
+    });
+
+});

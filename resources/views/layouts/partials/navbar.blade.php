@@ -1,4 +1,4 @@
-<header  class="bg-zinc-900 border-b-2 border-white">
+<header  class="bg-zinc-900 border-b-2 border-zinc-400">
     <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
         <div class="flex items-center space-x-8">
 {{--            Главная--}}
@@ -28,18 +28,20 @@
         @auth
             <div class="flex items-center space-x-4">
                 <a href="{{route('question.create')}}"
-                   class="bg-white border hover:bg-red-500 hover:text-white
-                          cursor-pointer text-black text-xl font-bold
+                   class="bg-red-500 border text-white hover:bg-white hover:text-black
+                          cursor-pointer text-xl font-bold
                           w-12 h-9 transition-colors flex items-center justify-center">
                     +
                 </a>
-                <a>
+                <a href="{{route('profile', auth()->user())}}"
+                   class="text-zinc-300 font-semibold hover:text-zinc-400 transition-colors">
                     Профиль
                 </a>
 
                 <form method="POST" action="{{route('auth.logout')}}">
                     @csrf
-                    <button>
+                    <button class="text-zinc-300 font-semibold cursor-pointer
+                    hover:text-zinc-400 transition-colors">
                         Выйти
                     </button>
                 </form>
