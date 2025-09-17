@@ -6,9 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
-use function Illuminate\Log\log as logAlias;
 
-class AdminMiddleware
+class Authenticate
 {
     /**
      * Handle an incoming request.
@@ -17,8 +16,14 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() || !$request->user()->is_admin) {
-            abort(403, 'Доступ запрещён.');
+        if(!Auth::check()) {
+            if($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Unauthorized'
+                ], 401);
+            }
+
+            return redirect()->route('auth.login');
         }
 
         return $next($request);

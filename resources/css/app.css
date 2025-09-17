@@ -11,6 +11,10 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
-    --color-brutal-red: #ff0000;
+    --color-brutal-red: #ea1c1c;
     --color-brutal-border: #4D4D4D;
+    --shadow-brutal: 5px 5px 0px rgba(255, 255, 255, 0.8);
+    --shadow-brutal-sm: 4px 4px 0px rgba(255, 255, 255, 0.8);
+    --shadow-brutal-2: 5px 5px 0px rgba(255, 255, 255, 0.2);
+    --shadow-brutal-sm-2: 4px 4px 0px rgba(255, 255, 255, 0.2);
 }

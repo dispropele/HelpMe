@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\HomeController;
@@ -37,4 +39,18 @@ Route::prefix('question')->name('question.')->group(function(){
 
     //Публичные пути
     Route::get('/{question}', [QuestionController::class, 'show'])->name('show');
+});
+
+//Маршруты админа
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function(){
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+    Route::prefix('/users')->name('users.')->group(function(){
+        Route::get('/', [AdminController::class, 'users'])->name('index');
+        Route::post('/', [UserController::class, 'store'])->name('store');
+    });
+
+    Route::get('/questions', [AdminController::class, 'questions'])->name('questions');
+    Route::get('/tags', [AdminController::class, 'tags'])->name('tags');
+    Route::get('/logs', [AdminController::class, 'logs'])->name('logs');
 });
