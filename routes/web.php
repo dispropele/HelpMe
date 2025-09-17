@@ -46,8 +46,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     Route::prefix('/users')->name('users.')->group(function(){
+        ///Отображение всех пользователей
         Route::get('/', [AdminController::class, 'users'])->name('index');
+        //Добавление пользователя
         Route::post('/', [UserController::class, 'store'])->name('store');
+
+        //Редактирование пользователя
+        Route::get('/{user}/edit', [UserController::class, 'update'])->name('update');
+        Route::put('/{user}', [UserController::class, 'edit'])->name('edit');
     });
 
     Route::get('/questions', [AdminController::class, 'questions'])->name('questions');

@@ -1,3 +1,4 @@
+
 <div x-show="showAddUserModal"
      class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-30"
      x-transition:enter="ease-out duration-300"
@@ -12,21 +13,27 @@
     <div @click.away="showAddUserModal = false" @keydown.escape.window="showAddUserModal = false"
          class="bg-zinc-900 border-2 border-brutal-border w-full max-w-lg p-8">
 
-        <h2 class="text-2xl font-bold text-brutal-primary mb-6">Add New User</h2>
+        <h2 class="text-2xl font-bold text-brutal-primary mb-6">Добавление нового пользователя</h2>
 
         <form action="{{ route('admin.users.store') }}" method="POST">
             @csrf
             <div class="space-y-6">
                 {{-- Поле: Имя --}}
                 <div>
-                    <label for="name" class="block text-sm font-bold text-brutal-primary">Name</label>
-                    <input type="text" name="name" id="name" required
+                    <label for="name" class="block text-sm font-bold text-brutal-primary">Логин</label>
+                    <input type="text" name="name" id="name" required value="{{old('name')}}"
                            class="mt-2 block w-full bg-transparent text-brutal-primary border border-brutal-border p-3 focus:outline-none focus:border-brutal-red">
                 </div>
                 {{-- Поле: Пароль --}}
                 <div>
-                    <label for="password" class="block text-sm font-bold text-brutal-primary">Password</label>
+                    <label for="password" class="block text-sm font-bold text-brutal-primary">Пароль</label>
                     <input type="password" name="password" id="password" required
+                           class="mt-2 block w-full bg-transparent text-brutal-primary border border-brutal-border p-3 focus:outline-none focus:border-brutal-red">
+                </div>
+                {{-- Поле: Подтверждение пароля --}}
+                <div>
+                    <label for="password_confirmation" class="block text-sm font-bold text-brutal-primary">Подтвердите пароль</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" required
                            class="mt-2 block w-full bg-transparent text-brutal-primary border border-brutal-border p-3 focus:outline-none focus:border-brutal-red">
                 </div>
                 {{-- Чекбокс: Админ --}}
@@ -34,7 +41,7 @@
                     <input id="is_admin" name="is_admin" type="checkbox" value="1"
                            class="h-4 w-4 bg-transparent border-brutal-border text-brutal-red focus:ring-brutal-red">
                     <label for="is_admin" class="ml-3 block text-sm text-brutal-primary">
-                        Assign as Administrator
+                        Админ
                     </label>
                 </div>
             </div>
@@ -42,11 +49,16 @@
             {{-- Кнопки --}}
             <div class="mt-8 flex justify-end space-x-4">
                 <button type="button" @click="showAddUserModal = false"
-                        class="bg-zinc-700 text-white font-bold py-2 px-6">
-                    Cancel
+                        class="bg-zinc-700 text-white
+                                hover:bg-zinc-600 border shadow-brutal-sm
+                                font-bold py-2 px-6 cursor-pointer">
+                    Отмена
                 </button>
-                <button type="submit" class="bg-brutal-red text-white font-bold py-2 px-6">
-                    Save User
+                <button type="submit"
+                        class="bg-brutal-red text-white
+                                border hover:bg-red-400 shadow-brutal-sm
+                                font-bold py-2 px-6 cursor-pointer">
+                    Сохранить
                 </button>
             </div>
         </form>

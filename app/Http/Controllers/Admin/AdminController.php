@@ -42,7 +42,7 @@ class AdminController extends Controller
     {
         $users = User::latest()->paginate(15);
 
-        return view('admin.users', [
+        return view('admin.users.index', [
             'users' => $users,
         ]);
     }
